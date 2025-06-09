@@ -13,3 +13,87 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Persons {
+  id                     Int               @id @default(autoincrement())
+  createdAt              DateTime          @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt              DateTime          @updatedAt @map("updated_at") @db.Timestamptz()
+  personName             String            @map("person_name") @db.VarChar(128)
+  personSurname          String            @map("person_surname") @db.VarChar(128)
+  dtBirth                DateTime?         @map("dt_birth") @db.Timestamptz()
+  cpfCnpjVat             String            @unique @map("cpf_cnpj_vat") @db.VarChar(32)
+  rg                     String?           @db.VarChar(32)
+  ie                     String?           @db.VarChar(32)
+  im                     String?           @db.VarChar(32)
+  customer               Boolean           @default(false)
+  supplier               Boolean           @default(false)
+  transport              Boolean           @default(false) @map("transport_company")
+  employee               Boolean           @default(false)
+  customerEmailNfe       String?           @map("curstomer_email_nfe") @db.VarChar(192)
+  customerEmailNfse      String?           @map("customer_email_nfse") @db.VarChar(192)
+  customerObsCommercial  String?           @map("customer_obs_commercial")
+  customerObsTechnical   String?           @map("customer_obs_technical")
+  customerRanking        Float?            @default(0) @map("customer_ranking")
+  customerStatus         CommonStatuses    @default(INACTIVE) @map("customer_status")
+  employeeStatus         CommonStatuses    @default(INACTIVE) @map("employee_status")
+  indIe                  PersonIndIe?      @map("ind_ie")
+  origin                 PersonOrigins     @default(DOMESTIC)
+  suframa                String?           @db.VarChar
+  supplierEmailNfe       String?           @map("supplier_email_nfe") @db.VarChar(192)
+  supplierEmailNfse      String?           @map("supplier_email_nfse") @db.VarChar(192)
+  supplierObsCommercial  String?           @map("supplier_obs_commercial")
+  supplierObsTechnical   String?           @map("supplier_obs_technical")
+  supplierRanking        Float?            @default(0) @map("supplier_ranking")
+  supplierStatus         CommonStatuses    @default(INACTIVE) @map("supplier_status")
+  taxRegime              PersonTaxRegimes? @map("tax_regime")
+  transportEmailNfe      String?           @map("transport_email_nfe") @db.VarChar(192)
+  transportEmailNfse     String?           @map("transport_email_nfse") @db.VarChar(192)
+  transportObsCommercial String?           @map("transport_obs_commercial")
+  transportObsTechnical  String?           @map("transport_obs_technical")
+  transportRanking       Float?            @default(0) @map("transport_ranking")
+  transportStatus        CommonStatuses    @default(INACTIVE) @map("transport_status")
+  type                   PersonTypes       @default(INDIVIDUAL)
+  employeeDtAdmission    DateTime?         @map("employee_dt_admission") @db.Timestamptz()
+  employeePis            String?           @map("employee_pis") @db.VarChar(11)
+  employeePositionId     Int?              @map("employee_id_position")
+  segmentId              Int?              @map("id_person_segment")
+
+  @@map("persons")
+}
+
+enum PersonTypes {
+  INDIVIDUAL
+  LEGAL_ENTITY
+  INTERNATIONAL
+
+  @@map("person_types")
+}
+
+enum PersonTaxRegimes {
+  SIMPLIFIED_NATIONAL
+  NORMAL_REGIME
+
+  @@map("person_tax_regimes")
+}
+
+enum PersonOrigins {
+  DOMESTIC
+  FOREIGN
+
+  @@map("person_origin")
+}
+
+enum PersonIndIe {
+  ICMS_TAXPAYER
+  EXEMPT_TAXPAYER
+  NON_TAXPAYER
+
+  @@map("person_ind_ie")
+}
+
+enum CommonStatuses {
+  INACTIVE
+  ACTIVE
+
+  @@map("default_statuses")
+}
