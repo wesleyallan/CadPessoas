@@ -170,7 +170,7 @@ const FacetsContent = <TData extends Record<string, unknown>, TValue>({ column, 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const facetedUniqueValues = Array.from<[string | number, number]>(column.getFacetedUniqueValues());
-  const columnType = column.columnDef.meta?.type;
+  const columnType = column.columnDef.meta?.type as "currency" | "date" | "faceted" | undefined;
 
   const rows: Facet[] = Array.isArray(facets)
     ? facets.reduce<typeof facets>((acc, cur) => {

@@ -19,17 +19,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-declare module "@tanstack/table-core" {
-  interface ColumnMeta<TData, TValue> {
-    translation?: string;
-    name?: string;
-  }
-}
-
 export interface Props<TData extends Record<string, unknown>>
   extends React.ComponentPropsWithoutRef<typeof DropdownMenuTrigger> {
   table: Table<TData>;
 }
+
 export const SettingsHeader = <TData extends Record<string, unknown>>({
   table,
   children,
