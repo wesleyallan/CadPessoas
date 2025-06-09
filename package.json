@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "npm run services:up",
+    "dev": "next dev --turbo",
+    "postdev": "npm run services:stop",
+    "prebuild": "next lint --quiet --fix",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --quiet --fix",
+    "services:up": "docker compose -p cadpessoas -f infra/database/compose.yaml up -d",
+    "services:stop": "docker compose -p cadpessoas -f infra/database/compose.yaml stop",
+    "services:down": "docker compose -p cadpessoas -f infra/database/compose.yaml down"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -35,7 +42,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sonner": "^2.0.5",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
