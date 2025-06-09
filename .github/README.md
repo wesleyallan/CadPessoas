@@ -9,6 +9,7 @@
 
 <p align="center">
   <a href="#-sobre">📋 Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-execução">⚙ Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">🚀 Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-ferramentas">🔧 Ferramentas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-autor">👤 Autor</a>
@@ -31,14 +32,51 @@ Este projeto é uma aplicação web moderna desenvolvida para facilitar o gerenc
 - Transportadoras
 - Colaboradores
 
+## ⚙ Execução
+
+Para executar o projeto localmente, siga os passos abaixo:
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/wesleyallan/CadPessoas.git
+```
+
+2. Entre no diretório do projeto:
+```bash
+cd CadPessoas
+```
+
+3. Instale as dependências:
+```bash
+npm install
+```
+
+4. Inicie o projeto (Script já levando o banco local):
+```bash
+npm run dev
+```
+
+5. Criar tabelas do banco de dados:
+```bash
+npx dotenv -e .env.development -- prisma migration deploy
+```
+
+6. Popular com dados de teste:
+```bash
+npx dotenv -e .env.development -- prisma db seed
+```
+
+O projeto estará disponível em `http://localhost:3000`
+
 ## 🚀 Tecnologias
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 - [Next.js](https://nextjs.org/) - Framework React para desenvolvimento web
 - [TailwindCSS](https://tailwindcss.com/) - Framework CSS utilitário
+- [Docker](https://www.docker.com/) - Plataforma para desenvolvimento, envio e execução de aplicações
+- [PostgreSQL](https://www.postgresql.org/) - Sistema de gerenciamento de banco de dados relacional
 - [Editor Config](https://editorconfig.org/) - Padronização de configurações do editor
-- [Prettier](https://prettier.io/) - Formatador de código
 - [ESLint](https://eslint.org/) - Linter para JavaScript/TypeScript
 - [JSX](https://reactjs.org/docs/introducing-jsx.html) - Sintaxe para React
 
